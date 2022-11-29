@@ -1,0 +1,2 @@
+class Cf < ApplicationRecord
+end

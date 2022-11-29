@@ -1,10 +1,102 @@
-<div><%= @corporations[1]['company_name'] %></div>
-<div><%= @corporations[1]['company_name_kana'] %></div>
-<div><%= @bs[1]['asset'] %></div>
-<div><%= @pls[1]['net_sale'] %></div>
-<div><%= @cfs[1]['net_cash_provided_by_used_in_operating_activity'] %></div>
+<div class="wrapper">
+  <div class="side-bar">
+    <div class="explore">
+      <label>検索
+        <form>
+          <input type="text" placeholder="会社名 or 会社コード" class="explore-form">
+        </form>
+      </label>
+    </div>
+    <div class="company-group">
+      <%= link_to '詳細ページ' , '/corporations/show' %>
+      <ul>
+        <a href="#"><li class="company-list">ソナーG</li></a>
+        <a href="#"><li class="company-list">三天堂</li></a>
+        <a href="#"><li class="company-list">カプコム</li></a>
+      </ul>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-upper">
+      2021年　総資産 合計：<%= @bs_asset_sum %>円
+    </div>
+    <div class="main-middle">
+      <svg width="100%" height="100%"></svg>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script>
+        // 1. 描画用のデータ準備
+        var width = document.querySelector("svg").clientWidth;
+        var height = document.querySelector("svg").clientHeight;
+        var data = {
+          "name": "A",
+          "children": [
+            { "name": "水産・農林業", "value": 1570904695000 },
+            { "name": "ガラス・土石", "value": 11161120620000 },
+            { "name": "鉱業", "value": 6016378000000 },
+            { "name": "建設業", "value": 36581939054000 },
+            { "name": "食料品", "value": 33032196297000 },
+            { "name": "パルプ・紙", "value": 6955209903000 },
+            { "name": "化学", "value": 61545051854000 },
+            { "name": "医薬品", "value": 32906982340000 },
+            { "name": "石油・石炭", "value": 16973528994000 },
+            { "name": "ゴム製品", "value": 8437401308000 },
+            { "name": "鉄鋼", "value": 22868243345000 },
+            { "name": "非鉄金属", "value": 14307877863000 },
+            { "name": "金属製品", "value": 9615506269000 },
+            { "name": "機械", "value": 47922100989000 },
+            { "name": "電気機器", "value": 128551452390000 },
+            { "name": "輸送用機器", "value": 159942074591000 },
+            { "name": "精密機器", "value": 9423701575000 },
+            { "name": "その他製品", "value": 13727202741000 },
+            { "name": "電気・ガス", "value": 58223926438000 },
+            { "name": "陸運業", "value": 49688867309000 },
+            { "name": "海運業", "value": 8346364647000 },
+            { "name": "空運業", "value": 5711455000000 },
+            { "name": "倉庫・運輸", "value": 3011940004000 },
+            { "name": "情報・通信業", "value": 130895527612000 },
+            { "name": "卸売業", "value": 106425681051000 },
+            { "name": "小売業", "value": 58153666586000 },
+            { "name": "銀行業", "value": 1694513829000000 },
+            { "name": "証券・商品", "value": 97223981022000 },
+            { "name": "保険業", "value": 217306849275000 },
+            { "name": "不動産業", "value": 42581075219000 },
+            { "name": "サービス業", "value": 346596343673000 },
+            { "name": "繊維製品", "value": 7942055892000 },
+            { "name": "その他金融業", "value": 144562993612000 },
+          ]
+        };
 
+        // 2. 描画用のデータ変換
+        root = d3.hierarchy(data);
+        root.sum(function (d) { return d.value; });
 
+        var pack = d3.pack()
+          .size([width, height])
+          .padding(0);
+
+        pack(root);
+
+        // 3. svg要素の配置
+        var node = d3.select("svg").selectAll(".node")
+          .data(root.descendants())
+          .enter()
+          .append("g")
+          .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
+
+        var color = ["#555", "Khaki", "Ivory"];
+        node.append("circle")
+          .attr("r", function (d) { return d.r; })
+          .attr("stroke", "none")
+          .attr("fill", function (d) { return color[d.depth]; });
+
+        node.append("text")
+          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; })
+          .attr("font-size", "100%")
+          .text(function (d) { return d.children ? "" : d.data.name; });
+      </script>
+    </div>
+  </div>
+</div>
 
 
 

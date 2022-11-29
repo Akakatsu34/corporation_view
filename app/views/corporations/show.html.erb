@@ -1,0 +1,74 @@
+<div class="wrapper">
+  <div class="side-bar">
+    <div class="explore">
+      <label>検索
+        <form>
+          <input type="text" placeholder="会社名 or 会社コード" class="explore-form">
+        </form>
+      </label>
+    </div>
+    <div class="company-group">
+      <ul>
+        <a href="#">
+          <li class="company-list"><%= @corporation_name1 %></li>
+        </a>
+        <a href="#">
+          <li class="company-list"><%= @corporation_name2 %></li>
+        </a>
+        <a href="#">
+          <li class="company-list"><%= @corporation_name3 %></li>
+        </a>
+      </ul>
+    </div>
+  </div>
+  <div class="main">
+    <div class="main-upper">
+      2021年　総資産　比較
+    </div>
+    <div class="main-middle">
+      <svg width="100%" height="100%"></svg>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <script>
+        // 1. 描画用のデータ準備
+        var width = document.querySelector("svg").clientWidth;
+        var height = document.querySelector("svg").clientHeight;
+        var data = {
+          "name": "A",
+          "children": [
+            { "name": "<%= @corporation_name1 %>", "value": <%= @bs_asset1 %> },
+            { "name": "<%= @corporation_name2 %>", "value": <%= @bs_asset2 %> },
+            { "name": "<%= @corporation_name3 %>", "value": <%= @bs_asset3 %> },
+          ]
+        };
+
+        // 2. 描画用のデータ変換
+        root = d3.hierarchy(data);
+        root.sum(function (d) { return d.value; });
+
+        var pack = d3.pack()
+          .size([width, height])
+          .padding(0);
+
+        pack(root);
+
+        // 3. svg要素の配置
+        var node = d3.select("svg").selectAll(".node")
+          .data(root.descendants())
+          .enter()
+          .append("g")
+          .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
+
+        var color = ["#555", "Khaki", "Ivory"];
+        node.append("circle")
+          .attr("r", function (d) { return d.r; })
+          .attr("stroke", "none")
+          .attr("fill", function (d) { return color[d.depth]; });
+
+        node.append("text")
+          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; })
+          .attr("font-size", "130%")
+          .text(function (d) { return d.children ? "" : d.data.name; });
+      </script>
+    </div>
+  </div>
+</div>

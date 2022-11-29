@@ -1,0 +1,121 @@
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* ヘッダー画面 */
+header {
+  width: 100%;
+  height: 100px;
+  background-color: #969696;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-right {
+  width: 150px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #000;
+  font-size: 15px;
+  color: #000;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 36px;
+  font-weight: 600;
+  padding-left: 30px;
+}
+
+/* 中央ブロック */
+.wrapper {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  background-color: #555;
+}
+
+/* サイドバー */
+.side-bar {
+  width: 250px;
+  height: 100%;
+  background-color: #D8D8D8;
+}
+
+.explore {
+  font-size: 20px;
+  margin: 10px;
+}
+
+.explore-form {
+  width: 80%;
+  height: 30px;
+  margin: 10px 10px;
+  font-size: 15px;
+}
+
+.company-group {
+  width: 100%;
+  margin: 20px;
+}
+
+.company-list {
+  width: 80%;
+  height: 50px;
+  font-size: 20px;
+  padding: 10px 20px 10px;
+  border: 1px solid #fff;
+  background-color: #969696;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* メイン画面 */
+
+.main {
+  width: calc(100% - 250px);
+  height: 100%;
+}
+
+.main-upper {
+  width: 100%;
+  height: 50px;
+  padding: 20px;
+  background-color: #333;
+  color: white;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.main-middle {
+  width: 100%;
+  height: calc(100% - 50px);
+}
+
+/* フッター画面 */
+footer {
+  width: 100%;
+  height: 70px;
+  background-color: #FAFAFA;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.copyright {
+  color: #959393;
+  font-size: 16px;
+}
+
+/* 検索条件 */

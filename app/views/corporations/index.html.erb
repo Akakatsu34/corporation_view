@@ -18,19 +18,24 @@
   </div>
   <div class="main">
     <div class="main-upper">
-      2021年　総資産 合計：<%= @bs_asset_sum %>円
+      2021年　総資産 合計：<%= number_to_currency(@bs_asset_sum, :locale=> 'jp') %>
     </div>
     <div class="main-middle">
-      <svg width="100%" height="100%"></svg>
-      <script src="https://d3js.org/d3.v5.min.js"></script>
+      <div id="corporation_graph"></div>
+      <script src="https://d3js.org/d3.v4.min.js"></script>
       <script>
         // 1. 描画用のデータ準備
+        var svg = d3.select("#corporation_graph")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "80vh")
+
         var width = document.querySelector("svg").clientWidth;
         var height = document.querySelector("svg").clientHeight;
         var data = {
-          "name": "A",
+          "name": "全業種",
           "children": [
-            { "name": "水産・農林業", "value": 1570904695000 },
+            { "name": "水産・農林業", "value": 1570904695000, "link": "/" },
             { "name": "ガラス・土石", "value": 11161120620000 },
             { "name": "鉱業", "value": 6016378000000 },
             { "name": "建設業", "value": 36581939054000 },
@@ -56,7 +61,7 @@
             { "name": "情報・通信業", "value": 130895527612000 },
             { "name": "卸売業", "value": 106425681051000 },
             { "name": "小売業", "value": 58153666586000 },
-            { "name": "銀行業", "value": 1694513829000000 },
+            { "name": "銀行業", "value": 1694513829000000, "link": "/" },
             { "name": "証券・商品", "value": 97223981022000 },
             { "name": "保険業", "value": 217306849275000 },
             { "name": "不動産業", "value": 42581075219000 },
@@ -73,9 +78,45 @@
         var pack = d3.pack()
           .size([width, height])
           .padding(0);
-
+          
         pack(root);
 
+        var tooltip = d3.select("#corporation_graph")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "2px")
+          .style("border-radius", "5px")
+          .style("padding", "5px")
+          .style("position", "absolute")
+
+        var showTooltip = function (d) {
+            tooltip
+              .transition()
+              .duration(200)
+            tooltip
+              .style("opacity", 1)
+              .html("業種：" + d.data.name + "<br>総資産：" + d.value + "円")
+              .style("left", (d3.event.pageX + 10) + "px")
+              .style("top", (d3.event.pageY + 20) + "px")
+              .style("pointer-events", "none")
+        };
+        
+        var moveTooltip = function (d) {
+            tooltip
+              .style("left", (d3.event.pageX + 10) + "px")
+              .style("top", (d3.event.pageY + 20) + "px")
+              .style("pointer-events", "none")
+        };
+
+        var hideTooltip = function (d) {
+            tooltip
+              .transition()
+              .duration(200)
+              .style("opacity", 0)
+        };
+      
         // 3. svg要素の配置
         var node = d3.select("svg").selectAll(".node")
           .data(root.descendants())
@@ -83,16 +124,22 @@
           .append("g")
           .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
 
-        var color = ["#555", "Khaki", "Ivory"];
+        var color = ["#555", "Khaki"];
         node.append("circle")
+          .attr("class", "bubbles")
           .attr("r", function (d) { return d.r; })
           .attr("stroke", "none")
-          .attr("fill", function (d) { return color[d.depth]; });
+          .attr("fill", function (d) { return color[d.depth]; })
+          .on("mouseover", showTooltip)
+          .on("mousemove", moveTooltip)
+          .on("mouseleave", hideTooltip)
 
         node.append("text")
-          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; })
+          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; } )
           .attr("font-size", "100%")
-          .text(function (d) { return d.children ? "" : d.data.name; });
+          .text(function (d) { return d.children ? "" : d.data.name;})
+          .style("pointer-events", "none")
+
       </script>
     </div>
   </div>

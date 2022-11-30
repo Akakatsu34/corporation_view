@@ -18,6 +18,17 @@ header {
   align-items: center;
 }
 
+.logo {
+  font-size: 36px;
+  font-weight: 600;
+  padding-left: 30px;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
 .header-right {
   width: 150px;
   padding: 20px;
@@ -30,10 +41,297 @@ header {
   text-align: center;
 }
 
-.logo {
-  font-size: 36px;
-  font-weight: 600;
-  padding-left: 30px;
+.select-main {
+  width: 600px;
+  height: 400px;
+  top: 50px;
+  right: 200px;
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+}
+
+.select-main.is-hidden {
+  visibility: visible;
+}
+
+/* 左画面 */
+.select-main-left {
+  width: 40%;
+  /* height: 100%; */
+  background-color: #888;
+}
+
+.select-year {
+  width: 100%;
+  height: 20%;
+  background-color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 150%;
+  color: #ccc;
+}
+
+.select {
+  height: 100%;
+}
+
+.market {
+  height: 40%;
+  background-color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.prime {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  font-size: 100%;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+
+.standard {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  font-size: 100%;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+.growth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ccc;
+  font-size: 100%;
+  margin-bottom: 5px;
+  padding: 10px;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+
+.type {
+  height: 40%;
+  background-color: #aaa;
+}
+
+/* 中央画面 */
+.select-main-center {
+  width: 30%;
+  height: 100%;
+  /* background-color: lightgreen; */
+}
+
+.bs {
+  width: 100%;
+  height: 50%;
+  background-color: lightseagreen;
+  display: flex;
+  padding: 30px;
+}
+
+.bs-left {
+  width: 50%;
+  height: 100%;
+  background-color: #666666;
+  color: #fff;
+}
+
+.bs-right {
+  width: 50%;
+}
+
+.liabilities {
+  width: 100%;
+  height: 50%;
+  background-color: #999999;
+}
+
+.equity {
+  width: 100%;
+  height: 50%;
+  background-color: #cccccc;
+}
+
+.cf {
+  width: 100%;
+  height: 50%;
+  background-color: lightblue;
+  padding: 30px;
+}
+
+.operating {
+  width: 100%;
+  height: 25%;
+  background-color: lightcyan;
+}
+
+.investing {
+  width: 100%;
+  height: 25%;
+  background-color: lightpink;
+}
+
+.financing {
+  width: 100%;
+  height: 25%;
+  background-color: lightyellow;
+}
+
+.free {
+  width: 100%;
+  height: 25%;
+  background-color: lightslategray;
+  color: #fff;
+}
+
+/* 右画面 */
+.select-main-right {
+  width: 30%;
+  height: 100%;
+  /* background-color: lightblue; */
+}
+
+.pl {
+  width: 100%;
+  height: 50%;
+  background-color: lightskyblue;
+  display: flex;
+  padding: 30px;
+}
+
+.uriagedaka {
+  width: 16.66%;
+  background-color: #222;
+  color: #fff;
+}
+
+.uriagedaka-top {}
+
+.uriagedaka-bottom {}
+
+.sourieki {
+  width: 16.66%;
+  background-color: #444;
+  color: #fff;
+}
+
+.sourieki-top {
+  height: 16.66%;
+  background-color: #fff;
+}
+
+
+.eigyo {
+  width: 16.66%;
+  background-color: #666;
+  color: #fff;
+}
+
+.eigyo-top {
+  height: 33.32%;
+  background-color: #fff;
+}
+
+.keijo {
+  width: 16.66%;
+  background-color: #888;
+}
+
+.keijo-top {
+  height: 49.98%;
+  background-color: #fff;
+}
+
+.zeimae {
+  width: 16.66%;
+  background-color: #aaa;
+}
+
+.zeimae-top {
+  height: 66.64%;
+  background-color: #fff;
+}
+
+.jun {
+  width: 16.66%;
+  background-color: #ccc;
+}
+
+.jun-top {
+  height: 83.3%;
+  background-color: #fff;
+}
+
+/* その他 */
+
+.other {
+  width: 100%;
+  height: 50%;
+  background-color: lightblue;
+  display: flex;
+}
+
+.other-left {
+  width: 50%;
+  height: 100%;
+  /* background-color: mediumblue; */
+}
+
+.market-capitalization {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.employee {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.other-right {
+  width: 50%;
+  height: 100%;
+}
+
+.stock-price {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.other-item {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
 }
 
 /* 中央ブロック */
@@ -75,9 +373,8 @@ header {
   padding: 10px 20px 10px;
   border: 1px solid #fff;
   background-color: #969696;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  text-align: center;
+  overflow: scroll;
 }
 
 /* メイン画面 */
@@ -101,6 +398,20 @@ header {
 .main-middle {
   width: 100%;
   height: calc(100% - 50px);
+}
+
+#corporation-graph {
+  width: 100%;
+  height: 100vh;
+}
+
+.bubbles {
+  stroke-width: 2px;
+  stroke: #555;
+}
+
+.bubbles:hover {
+  stroke: #555;
 }
 
 /* フッター画面 */

@@ -18,6 +18,9 @@
         <a href="#">
           <li class="company-list"><%= @corporation_name3 %></li>
         </a>
+        <a href="#">
+          <li class="company-list"><%= @corporation_name4 %></li>
+        </a>
       </ul>
     </div>
   </div>
@@ -26,31 +29,73 @@
       2021年　総資産　比較
     </div>
     <div class="main-middle">
-      <svg width="100%" height="100%"></svg>
+      <div id="corporation_graph"></div>
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <script>
-        // 1. 描画用のデータ準備
+        var svg = d3.select("#corporation_graph")
+            .append("svg")
+            .attr("width", "100%")
+            .attr("height", "80vh")
+
         var width = document.querySelector("svg").clientWidth;
         var height = document.querySelector("svg").clientHeight;
+
         var data = {
-          "name": "A",
+          "name": "総計",
           "children": [
             { "name": "<%= @corporation_name1 %>", "value": <%= @bs_asset1 %> },
             { "name": "<%= @corporation_name2 %>", "value": <%= @bs_asset2 %> },
             { "name": "<%= @corporation_name3 %>", "value": <%= @bs_asset3 %> },
+            { "name": "<%= @corporation_name4 %>", "value": <%= @bs_asset4 %> },
           ]
         };
 
         // 2. 描画用のデータ変換
-        root = d3.hierarchy(data);
+                root = d3.hierarchy(data);
         root.sum(function (d) { return d.value; });
 
         var pack = d3.pack()
           .size([width, height])
           .padding(0);
-
+          
         pack(root);
 
+        var tooltip = d3.select("#corporation_graph")
+          .append("div")
+          .attr("class", "tooltip")
+          .style("background-color", "white")
+          .style("border", "solid")
+          .style("border-width", "2px")
+          .style("border-radius", "5px")
+          .style("padding", "5px")
+          .style("position", "absolute")
+
+        var showTooltip = function (d) {
+            tooltip
+              .transition()
+              .duration(200)
+            tooltip
+              .style("opacity", 1)
+              .html("銘柄：" + d.data.name + "<br>総資産：" + d.value + "円")
+              .style("left", (d3.event.pageX + 10) + "px")
+              .style("top", (d3.event.pageY + 20) + "px")
+              .style("pointer-events", "none")
+        };
+        
+        var moveTooltip = function (d) {
+            tooltip
+              .style("left", (d3.event.pageX + 10) + "px")
+              .style("top", (d3.event.pageY + 20) + "px")
+              .style("pointer-events", "none")
+        };
+
+        var hideTooltip = function (d) {
+            tooltip
+              .transition()
+              .duration(200)
+              .style("opacity", 0)
+        };
+      
         // 3. svg要素の配置
         var node = d3.select("svg").selectAll(".node")
           .data(root.descendants())
@@ -58,16 +103,21 @@
           .append("g")
           .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
 
-        var color = ["#555", "Khaki", "Ivory"];
+        var color = ["#555", "Khaki"];
         node.append("circle")
+          .attr("class", "bubbles")
           .attr("r", function (d) { return d.r; })
           .attr("stroke", "none")
-          .attr("fill", function (d) { return color[d.depth]; });
+          .attr("fill", function (d) { return color[d.depth]; })
+          .on("mouseover", showTooltip)
+          .on("mousemove", moveTooltip)
+          .on("mouseleave", hideTooltip)
 
         node.append("text")
-          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; })
-          .attr("font-size", "130%")
-          .text(function (d) { return d.children ? "" : d.data.name; });
+          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; } )
+          .attr("font-size", "100%")
+          .text(function (d) { return d.children ? "" : d.data.name;})
+          .style("pointer-events", "none")
       </script>
     </div>
   </div>

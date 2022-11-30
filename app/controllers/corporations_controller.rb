@@ -13,8 +13,10 @@ class CorporationsController < ApplicationController
     @corporation_name1 = Corporation.find_by(security_code: 6758).security_name
     @corporation_name2 = Corporation.find_by(security_code: 7974).security_name
     @corporation_name3 = Corporation.find_by(security_code: 9697).security_name
+    @corporation_name4 = Corporation.find_by(security_code: 9684).security_name
     @bs_asset1 = Bs.find_by(security_code: 6758).asset
     @bs_asset2 = Bs.find_by(security_code: 7974).asset
     @bs_asset3 = Bs.find_by(security_code: 9697).asset
+    @bs_asset4 = Bs.find_by(security_code: 9684).asset
   end
 end

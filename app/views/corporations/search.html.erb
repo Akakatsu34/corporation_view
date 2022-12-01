@@ -1,0 +1,14 @@
+<div class="corporations">
+  <% @results.each do |corporation| %>
+    <%= link_to '/corporations/show' do %>
+      <div class="corporation-colum">
+        <div class="security-name"><%= corporation.security_name %></div>
+        <div class="security-code"><%= corporation.security_code %></div>
+      </div>
+    <% end %> 
+  <% end %>
+</div> 
+<div class="return">
+  <%= link_to '←比較ページに戻る' , '/corporations/show' %>
+</div>
+ 

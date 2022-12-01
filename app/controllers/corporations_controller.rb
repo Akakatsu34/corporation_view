@@ -1,4 +1,6 @@
 class CorporationsController < ApplicationController
+  before_action :set_q, only: [:index, :show, :search]
+
   def index
     @corporations = Corporation.all
     @bs = Bs.all
@@ -18,5 +20,19 @@ class CorporationsController < ApplicationController
     @bs_asset2 = Bs.find_by(security_code: 7974).asset
     @bs_asset3 = Bs.find_by(security_code: 9697).asset
     @bs_asset4 = Bs.find_by(security_code: 9684).asset
+    @corporation_name = Corporation.find_by(security_code: 9684).security_name
+    @corporation_data = { "security_name": "AAA", "value": 50000000000 }
+    @results = @q.result
   end
+
+  def search
+    @results = @q.result
+  end
+
+  private
+
+   def set_q
+    @q = Corporation.ransack(params[:q])
+  end
+
 end

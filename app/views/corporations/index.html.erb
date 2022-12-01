@@ -1,19 +1,9 @@
 <div class="wrapper">
   <div class="side-bar">
-    <div class="explore">
-      <label>検索
-        <form>
-          <input type="text" placeholder="会社名 or 会社コード" class="explore-form">
-        </form>
-      </label>
-    </div>
     <div class="company-group">
-      <%= link_to '詳細ページ' , '/corporations/show' %>
-      <ul>
-        <a href="#"><li class="company-list">ソナーG</li></a>
-        <a href="#"><li class="company-list">三天堂</li></a>
-        <a href="#"><li class="company-list">カプコム</li></a>
-      </ul>
+      <div class="show-page-button">
+        <%= link_to '詳細ページ' , '/corporations/show' %>
+      </div>
     </div>
   </div>
   <div class="main">

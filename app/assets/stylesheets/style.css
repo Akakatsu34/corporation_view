@@ -49,6 +49,8 @@ a {
   display: flex;
   visibility: hidden;
   position: absolute;
+  border: solid 5px white;
+  border-radius: 10px;
 }
 
 .select-main.is-hidden {
@@ -349,16 +351,33 @@ a {
   background-color: #D8D8D8;
 }
 
-.explore {
-  font-size: 20px;
-  margin: 10px;
+.show-page-button {
+  width: 200px;
+  height: 50px;
+  font-size: 25px;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.explore-form {
-  width: 80%;
-  height: 30px;
-  margin: 10px 10px;
-  font-size: 15px;
+.explore {
+  margin: 20px;
+}
+
+.search-field {
+  width: 200px;
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.search-button {
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
 }
 
 .company-group {
@@ -369,12 +388,12 @@ a {
 .company-list {
   width: 80%;
   height: 50px;
-  font-size: 20px;
+  font-size: 15px;
   padding: 10px 20px 10px;
   border: 1px solid #fff;
   background-color: #969696;
   text-align: center;
-  overflow: scroll;
+
 }
 
 /* メイン画面 */
@@ -422,11 +441,53 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  color: #959393;
 }
 
 .copyright {
-  color: #959393;
   font-size: 16px;
+  margin-bottom: 3px;
 }
 
 /* 検索条件 */
+.corporations {
+  width: 100%;
+  height: 75%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  overflow: scroll;
+}
+
+.corporation-colum {
+  width: 200px;
+  height: 50px;
+  margin: 5px 10px;
+  border: solid 1px black;
+  border-radius: 10px;
+  background-color: #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.security-name {
+  font-size: 20px;
+  margin-bottom: 2px;
+}
+
+.security-code {
+  font-size: 10px;
+}
+
+.return {
+  width: 180px;
+  height: 20px;
+  padding-bottom: 10px;
+  border-bottom: solid 1px black ;
+  font-size: 20px;
+  background-color: rgba(128, 64, 0, 0.5);
+}

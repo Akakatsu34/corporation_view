@@ -491,3 +491,8 @@ footer {
   font-size: 20px;
   background-color: rgba(128, 64, 0, 0.5);
 }
+
+.sector_thirty_three_list {
+  margin: 20px;
+  font-size: 15px;
+}

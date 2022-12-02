@@ -25,7 +25,7 @@ class CorporationsController < ApplicationController
 
   def set_q
     @q = Corporation.ransack(params[:q])
-    @q.sorts = 'asset desc' if @q.sorts.empty?
+    @q.sorts = 'net_sale desc' if @q.sorts.empty?
   end
 
 end

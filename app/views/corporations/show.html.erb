@@ -4,14 +4,51 @@
       <%= search_form_for @q, url: '/corporations/show', html: {id: "detailed-search-form"} do |f| %>
         <%= f.search_field :security_name_i_cont_any, class: "search-field", placeholder: '会社名' %>
         <%= f.search_field :security_code_eq, class: "search-field" , placeholder: '証券コード' %>
+        <%= f.search_field :sector_thirty_three_name_cont, class: "search-field" , placeholder: '業種' %>
         <%= f.submit '検索' , class: "search-button" %>
       <% end %>
     </div>
-
+    <div class="sector_thirty_three_list">
+      <ul>
+        <li>水産・農林業</li>
+        <li>ガラス・土石</li>
+        <li>鉱業</li>
+        <li>建設業</li>
+        <li>食料品</li>
+        <li>パルプ・紙</li>
+        <li>化学</li>
+        <li>医薬品</li>
+        <li>石油・石炭</li>
+        <li>ゴム製品</li>
+        <li>鉄鋼</li>
+        <li>非鉄金属</li>
+        <li>金属製品</li>
+        <li>機械</li>
+        <li>電気機器</li>
+        <li>輸送用機器</li>
+        <li>精密機器</li>
+        <li>その他製品</li>
+        <li>電気・ガス</li>
+        <li>陸運業</li>
+        <li>海運業</li>
+        <li>空運業</li>
+        <li>倉庫・運輸</li>
+        <li>情報・通信業</li>
+        <li>卸売業</li>
+        <li>小売業</li>
+        <li>銀行業</li>
+        <li>証券・商品</li>
+        <li>保険業</li>
+        <li>不動産業</li>
+        <li>サービス業</li>
+        <li>繊維製品</li>
+        <li>その他金融業</li>
+      </ul>
+    </div>
   </div>
   <div class="main">
     <div class="main-upper">
-      2021年　総資産　比較
+      2021年　売上高　比較
     </div>
     <div class="main-middle">
       <div id="corporation_graph"></div>
@@ -32,7 +69,7 @@
 
         <% @corporation_results.first(50).each do | corporation | %>
           var corporation_name = { security_name: "<%= corporation.security_name %>" };
-          var corporation_value = { value: <%= corporation.asset %> };
+          var corporation_value = { value: <%= corporation.net_sale %> };
           var corporation_data = Object.assign(corporation_name, corporation_value);
           data.children.push(corporation_data);
         <% end %>
@@ -64,16 +101,16 @@
               .duration(200)
             tooltip
               .style("opacity", 1)
-              .html("銘柄：" + d.data.security_name + "<br>総資産：" + d.value + "百万円")
+              .html("銘柄：" + d.data.security_name + "<br>売上高：" + d.value + "百万円")
               .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY + 20) + "px")
+              .style("top", (d3.event.pageY - 40) + "px")
               .style("pointer-events", "none")
         };
         
         const moveTooltip = function (d) {
             tooltip
               .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY + 20) + "px")
+              .style("top", (d3.event.pageY - 40) + "px")
               .style("pointer-events", "none")
         };
 

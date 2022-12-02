@@ -2,7 +2,7 @@
   <div class="side-bar">
     <div class="explore">
       <%= search_form_for @q, url: '/corporations/show', html: {id: "detailed-search-form"} do |f| %>
-        <%= f.search_field :security_name_i_cont_any, class: "search-field", placeholder: '会社名' %>
+        <%= f.search_field :security_name_cont_any, class: "search-field", placeholder: '会社名' %>
         <%= f.search_field :security_code_eq, class: "search-field" , placeholder: '証券コード' %>
         <%= f.search_field :sector_thirty_three_name_cont, class: "search-field" , placeholder: '業種' %>
         <%= f.submit '検索' , class: "search-button" %>
@@ -48,7 +48,7 @@
   </div>
   <div class="main">
     <div class="main-upper">
-      2021年　売上高　比較
+      2021年　売上高　上位<%= @count %>社
     </div>
     <div class="main-middle">
       <div id="corporation_graph"></div>
@@ -67,7 +67,7 @@
           children: []
         };
 
-        <% @corporation_results.first(50).each do | corporation | %>
+        <% @corporation_results.first(@count).each do | corporation | %>
           var corporation_name = { security_name: "<%= corporation.security_name %>" };
           var corporation_value = { value: <%= corporation.net_sale %> };
           var corporation_data = Object.assign(corporation_name, corporation_value);

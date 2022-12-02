@@ -8,7 +8,7 @@
   </div>
   <div class="main">
     <div class="main-upper">
-      2021年　総資産 合計：<%= number_to_currency(@bs_asset_sum, :locale=> 'jp') %>
+      2021年　総資産 合計：<%= @bs_asset_sum %>百万円
     </div>
     <div class="main-middle">
       <div id="corporation_graph"></div>
@@ -67,7 +67,7 @@
 
         var pack = d3.pack()
           .size([width, height])
-          .padding(0);
+          .padding(10);
           
         pack(root);
 

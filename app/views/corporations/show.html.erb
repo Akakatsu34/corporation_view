@@ -7,7 +7,7 @@
         <%= f.submit '検索' , class: "search-button" %>
       <% end %>
     </div>
-    <%= render(:partial=> "show", :object => @results) %>
+
   </div>
   <div class="main">
     <div class="main-upper">
@@ -17,35 +17,38 @@
       <div id="corporation_graph"></div>
       <script src="https://d3js.org/d3.v5.min.js"></script>
       <script>
-        var svg = d3.select("#corporation_graph")
+        const svg = d3.select("#corporation_graph")
             .append("svg")
             .attr("width", "100%")
             .attr("height", "80vh")
 
-        var width = document.querySelector("svg").clientWidth;
-        var height = document.querySelector("svg").clientHeight;
-
+        const width = document.querySelector("svg").clientWidth;
+        const height = document.querySelector("svg").clientHeight;
+        
         var data = {
           security_name: "総計",
-          children: [
-            { security_name: "<%= @corporation_name1 %>", value: <%= @bs_asset1 %> },
-            { security_name: "<%= @corporation_name2 %>", value: <%= @bs_asset2 %> },
-            { security_name: "<%= @corporation_name3 %>", value: <%= @bs_asset3 %> },
-            { security_name: "<%= @corporation_name4 %>", value: <%= @bs_asset4 %> },
-          ]
+          children: []
         };
+
+        <% @corporation_results.first(50).each do | corporation | %>
+          var corporation_name = { security_name: "<%= corporation.security_name %>" };
+          var corporation_value = { value: <%= corporation.asset %> };
+          var corporation_data = Object.assign(corporation_name, corporation_value);
+          data.children.push(corporation_data);
+        <% end %>
+        
 
         // 2. 描画用のデータ変換
         root = d3.hierarchy(data);
         root.sum(function (d) { return d.value; });
 
-        var pack = d3.pack()
+        const pack = d3.pack()
           .size([width, height])
-          .padding(0);
+          .padding(5);
           
         pack(root);
 
-        var tooltip = d3.select("#corporation_graph")
+        const tooltip = d3.select("#corporation_graph")
           .append("div")
           .attr("class", "tooltip")
           .style("background-color", "white")
@@ -55,26 +58,26 @@
           .style("padding", "5px")
           .style("position", "absolute")
 
-        var showTooltip = function (d) {
+        const showTooltip = function (d) {
             tooltip
               .transition()
               .duration(200)
             tooltip
               .style("opacity", 1)
-              .html("銘柄：" + d.data.security_name + "<br>総資産：" + d.value + "円")
+              .html("銘柄：" + d.data.security_name + "<br>総資産：" + d.value + "百万円")
               .style("left", (d3.event.pageX + 10) + "px")
               .style("top", (d3.event.pageY + 20) + "px")
               .style("pointer-events", "none")
         };
         
-        var moveTooltip = function (d) {
+        const moveTooltip = function (d) {
             tooltip
               .style("left", (d3.event.pageX + 10) + "px")
               .style("top", (d3.event.pageY + 20) + "px")
               .style("pointer-events", "none")
         };
 
-        var hideTooltip = function (d) {
+        const hideTooltip = function (d) {
             tooltip
               .transition()
               .duration(200)
@@ -82,13 +85,14 @@
         };
       
         // 3. svg要素の配置
-        var node = d3.select("svg").selectAll(".node")
+        const node = d3.select("svg").selectAll(".node")
           .data(root.descendants())
           .enter()
           .append("g")
           .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
 
-        var color = ["#555", "Khaki"];
+        const color = ["#555", "Khaki"];
+
         node.append("circle")
           .attr("class", "bubbles")
           .attr("r", function (d) { return d.r; })

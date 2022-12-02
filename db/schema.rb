@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2022_11_29_195436) do
 
-  create_table "bs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "bs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "security_code"
     t.integer "year"
     t.bigint "asset"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_11_29_195436) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "cfs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "cfs", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "security_code"
     t.integer "year"
     t.bigint "net_cash_provided_by_used_in_operating_activity"
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2022_11_29_195436) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "corporations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "corporations", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "security_code"
     t.string "company_name"
     t.string "company_name_kana"
@@ -49,11 +49,13 @@ ActiveRecord::Schema.define(version: 2022_11_29_195436) do
     t.integer "sector_seventeen_number"
     t.string "sector_seventeen_name"
     t.string "closing_date"
+    t.bigint "asset"
+    t.bigint "net_sale"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "pls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "pls", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "security_code"
     t.integer "year"
     t.bigint "net_sale"

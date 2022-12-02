@@ -14,6 +14,8 @@ class CreateCorporations < ActiveRecord::Migration[6.0]
       t.integer :sector_seventeen_number
       t.string :sector_seventeen_name
       t.string :closing_date
+      t.integer :asset, :limit => 8
+      t.integer :net_sale, :limit => 8
       t.timestamps
     end
   end

@@ -12,17 +12,9 @@ class CorporationsController < ApplicationController
   end
 
   def show
-    @corporation_name1 = Corporation.find_by(security_code: 6758).security_name
-    @corporation_name2 = Corporation.find_by(security_code: 7974).security_name
-    @corporation_name3 = Corporation.find_by(security_code: 9697).security_name
-    @corporation_name4 = Corporation.find_by(security_code: 9684).security_name
-    @bs_asset1 = Bs.find_by(security_code: 6758).asset
-    @bs_asset2 = Bs.find_by(security_code: 7974).asset
-    @bs_asset3 = Bs.find_by(security_code: 9697).asset
-    @bs_asset4 = Bs.find_by(security_code: 9684).asset
-    @corporation_name = Corporation.find_by(security_code: 9684).security_name
-    @corporation_data = { "security_name": "AAA", "value": 50000000000 }
-    @results = @q.result
+    @corporation_results = @q.result
+    @corporation_name = Corporation.find_by(security_code: 9684)
+    @corporation_asset = Bs.find_by(asset: @corporation_name.security_code)
   end
 
   def search
@@ -31,8 +23,9 @@ class CorporationsController < ApplicationController
 
   private
 
-   def set_q
+  def set_q
     @q = Corporation.ransack(params[:q])
+    @q.sorts = 'asset desc' if @q.sorts.empty?
   end
 
 end

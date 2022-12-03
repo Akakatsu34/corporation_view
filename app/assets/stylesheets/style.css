@@ -496,3 +496,200 @@ footer {
   margin: 20px;
   font-size: 15px;
 }
+
+.show-main {
+  width: 100vw;
+  height: 80%;
+  display: flex;
+}
+
+.show-main-left {
+  width: 40%;
+  /* height: 100%; */
+  background-color: #888;
+}
+
+.show-corporation-information {
+  width: 100%;
+  height: 20%;
+  background-color: #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.show-corporation-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 300%;
+  color: #ccc;
+  margin: 10px 30px 5px 30px;
+}
+
+.show-security_code {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 200%;
+  color: #ccc;
+}
+
+.show-market {
+  height: 40%;
+  background-color: #888;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.show-year {
+  width: 50%;
+  font-size: 20px;
+  background-color: #aaa;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.show-market-name {
+  width: 50%;
+  font-size: 20px;
+  background-color: #aaa;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.show-sector {
+  width: 50%;
+  font-size: 20px;
+  background-color: #aaa;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.show-type {
+  height: 40%;
+  background-color: #aaa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.show-address {
+  width: 50%;
+  font-size: 20px;
+  background-color: #ccc;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.show-closing-date {
+  width: 50%;
+  font-size: 20px;
+  background-color: #ccc;
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+/* 中央画面 */
+.show-main-center {
+  width: 30%;
+  height: 100%;
+  /* background-color: lightgreen; */
+}
+
+.show-bs {
+  width: 100%;
+  height: 50%;
+  background-color: lightseagreen;
+  display: flex;
+  padding: 30px;
+}
+
+.show-cf {
+  width: 100%;
+  height: 50%;
+  background-color: lightblue;
+  padding: 30px;
+}
+
+/* 右画面 */
+.show-main-right {
+  width: 30%;
+  height: 100%;
+  /* background-color: lightblue; */
+}
+
+.show-pl {
+  width: 100%;
+  height: 50%;
+  background-color: lightskyblue;
+  display: flex;
+  padding: 30px;
+}
+
+/* その他 */
+
+.show-other {
+  width: 100%;
+  height: 50%;
+  background-color: lightblue;
+  display: flex;
+}
+
+.show-other-left {
+  width: 50%;
+  height: 100%;
+}
+
+.show-market-capitalization {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.show-employee {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.show-other-right {
+  width: 50%;
+  height: 100%;
+}
+
+.show-stock-price {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}
+
+.show-other-item {
+  height: 50%;
+  background-color: #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+}

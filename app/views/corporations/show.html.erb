@@ -1,150 +1,155 @@
-<div class="wrapper">
-  <div class="side-bar">
-    <div class="explore">
-      <%= search_form_for @q, url: '/corporations/show', html: {id: "detailed-search-form"} do |f| %>
-        <%= f.search_field :security_name_cont_any, class: "search-field", placeholder: '会社名' %>
-        <%= f.search_field :security_code_eq, class: "search-field" , placeholder: '証券コード' %>
-        <%= f.search_field :sector_thirty_three_name_cont, class: "search-field" , placeholder: '業種' %>
-        <%= f.submit '検索' , class: "search-button" %>
-      <% end %>
+<div class="show-main">
+  <div class="show-main-left">
+    <div class="show-corporation-information">
+      <div class="show-corporation-name">
+        <%= @corporation_name %>
+      </div>
+      <div class="show-security_code">
+        <%= @code %>
+      </div>
     </div>
-    <div class="sector_thirty_three_list">
-      <ul>
-        <li>水産・農林業</li>
-        <li>ガラス・土石</li>
-        <li>鉱業</li>
-        <li>建設業</li>
-        <li>食料品</li>
-        <li>パルプ・紙</li>
-        <li>化学</li>
-        <li>医薬品</li>
-        <li>石油・石炭</li>
-        <li>ゴム製品</li>
-        <li>鉄鋼</li>
-        <li>非鉄金属</li>
-        <li>金属製品</li>
-        <li>機械</li>
-        <li>電気機器</li>
-        <li>輸送用機器</li>
-        <li>精密機器</li>
-        <li>その他製品</li>
-        <li>電気・ガス</li>
-        <li>陸運業</li>
-        <li>海運業</li>
-        <li>空運業</li>
-        <li>倉庫・運輸</li>
-        <li>情報・通信業</li>
-        <li>卸売業</li>
-        <li>小売業</li>
-        <li>銀行業</li>
-        <li>証券・商品</li>
-        <li>保険業</li>
-        <li>不動産業</li>
-        <li>サービス業</li>
-        <li>繊維製品</li>
-        <li>その他金融業</li>
-      </ul>
+    <div class="show-market">
+      <div class="show-year">
+        <h2>年度</h2>
+        <%= @year %>年
+      </div>
+      <div class="show-market-name">
+        <h2>市場</h2>
+        <%= @market %>
+      </div>
+      <div class="show-sector">
+        <h2>業種</h2>
+        <%= @sector_thirty_three_name %>
+      </div>
+    </div>
+    <div class="show-type">
+      <div class="show-address">
+        <h2>住所</h2>
+        <%= @address %>
+      </div>
+      <div class="show-closing-date">
+        <h2>決算日</h2>
+        <%= @closing_date %>
+      </div>
     </div>
   </div>
-  <div class="main">
-    <div class="main-upper">
-      2021年　売上高　上位<%= @count %>社
-    </div>
-    <div class="main-middle">
-      <div id="corporation_graph"></div>
-      <script src="https://d3js.org/d3.v5.min.js"></script>
+  <div class="show-main-center">
+    <div class="show-bs">
+      <canvas id="bs-graph" width="200" height="200"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
-        const svg = d3.select("#corporation_graph")
-            .append("svg")
-            .attr("width", "100%")
-            .attr("height", "80vh")
-
-        const width = document.querySelector("svg").clientWidth;
-        const height = document.querySelector("svg").clientHeight;
-        
-        var data = {
-          security_name: "総計",
-          children: []
-        };
-
-        <% @corporation_results.first(@count).each do | corporation | %>
-          var corporation_name = { security_name: "<%= corporation.security_name %>" };
-          var corporation_value = { value: <%= corporation.net_sale %> };
-          var corporation_data = Object.assign(corporation_name, corporation_value);
-          data.children.push(corporation_data);
-        <% end %>
-        
-
-        // 2. 描画用のデータ変換
-        root = d3.hierarchy(data);
-        root.sum(function (d) { return d.value; });
-
-        const pack = d3.pack()
-          .size([width, height])
-          .padding(5);
-          
-        pack(root);
-
-        const tooltip = d3.select("#corporation_graph")
-          .append("div")
-          .attr("class", "tooltip")
-          .style("background-color", "white")
-          .style("border", "solid")
-          .style("border-width", "2px")
-          .style("border-radius", "5px")
-          .style("padding", "5px")
-          .style("position", "absolute")
-
-        const showTooltip = function (d) {
-            tooltip
-              .transition()
-              .duration(200)
-            tooltip
-              .style("opacity", 1)
-              .html("銘柄：" + d.data.security_name + "<br>売上高：" + d.value + "百万円")
-              .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY - 40) + "px")
-              .style("pointer-events", "none")
-        };
-        
-        const moveTooltip = function (d) {
-            tooltip
-              .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY - 40) + "px")
-              .style("pointer-events", "none")
-        };
-
-        const hideTooltip = function (d) {
-            tooltip
-              .transition()
-              .duration(200)
-              .style("opacity", 0)
-        };
-      
-        // 3. svg要素の配置
-        const node = d3.select("svg").selectAll(".node")
-          .data(root.descendants())
-          .enter()
-          .append("g")
-          .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
-
-        const color = ["#555", "Khaki"];
-
-        node.append("circle")
-          .attr("class", "bubbles")
-          .attr("r", function (d) { return d.r; })
-          .attr("stroke", "none")
-          .attr("fill", function (d) { return color[d.depth]; })
-          .on("mouseover", showTooltip)
-          .on("mousemove", moveTooltip)
-          .on("mouseleave", hideTooltip)
-
-        node.append("text")
-          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; } )
-          .attr("font-size", "100%")
-          .text(function (d) { return d.children ? "" : d.data.security_name;})
-          .style("pointer-events", "none")
+        var ctx = document.getElementById('bs-graph');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['総資産', '純資産'],
+            datasets: [{
+              label: '貸借対照表',
+              data: [<%= @asset %>, <%= @net_asset %>],
+              backgroundColor: [
+                'rgba(75, 255, 192, 1)',
+                'rgba(54, 162, 255, 1)',
+              ],
+              borderColor: [
+                'rgba(75, 255, 192, 1)',
+                'rgba(54, 162, 255, 1)',
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
       </script>
+    </div>
+    <div class="show-cf">
+      <canvas id="cf-graph" width="200" height="200"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        var ctx = document.getElementById('cf-graph');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['営業', '投資', '財務'],
+            datasets: [{
+              label: 'キャッシュフロー',
+              data: [<%= @operating %>, <%= @investiment %>, <%= @financing %>],
+          backgroundColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 206, 86, 1)',
+          ],
+          borderColor: [
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 99, 132, 1)',
+            'rgba(255, 206, 86, 1)',
+          ],
+            borderWidth: 1
+                  }]
+                },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+              });
+      </script>
+    </div>
+  </div>
+  <div class="show-main-right">
+    <div class="show-pl">
+      <canvas id="pl-graph" width="200" height="200"></canvas>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        var ctx = document.getElementById('pl-graph');
+        var myChart = new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: ['売上高', '営業利益', '経常利益', '純利益'],
+            datasets: [{
+              label: '損益計算書',
+              data: [<%= @net_sale %>, <%= @operating_income %>, <%= @ordinary_income %>, <%= @profit_loss %>],
+              backgroundColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 255, 192, 1)',
+              ],
+              borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 255, 192, 1)',
+              ],
+              borderWidth: 1
+            }]
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true
+              }
+            }
+          }
+        });
+      </script>
+    </div>
+    <div class="show-other">
+      <div class="show-other-left">
+        <div class="show-market-capitalization">時価総額</div>
+        <div class="show-employee">従業員数</div>
+      </div>
+      <div class="show-other-right">
+        <div class="show-stock-price">株価</div>
+        <div class="show-other-item">その他</div>
+      </div>
     </div>
   </div>
 </div>

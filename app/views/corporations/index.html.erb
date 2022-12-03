@@ -1,77 +1,91 @@
 <div class="wrapper">
   <div class="side-bar">
-    <div class="company-group">
-      <div class="show-page-button">
-        <%= link_to '詳細ページ' , '/corporations/show' %>
-      </div>
+    <div class="explore">
+      <%= search_form_for @q, url: '/' , html: {id: "detailed-search-form" } do |f| %>
+        <%= f.search_field :security_name_cont_any, class: "search-field" , placeholder: '会社名' %>
+        <%= f.search_field :security_code_eq, class: "search-field" , placeholder: '証券コード' %>
+        <%= f.search_field :sector_thirty_three_name_cont, class: "search-field" , placeholder: '業種' %>
+        <%= f.submit '検索' , class: "search-button" %>
+      <% end %>
+    </div>
+    <div class="sector_thirty_three_list">
+      <ul>
+        <li>水産・農林業</li>
+        <li>ガラス・土石</li>
+        <li>鉱業</li>
+        <li>建設業</li>
+        <li>食料品</li>
+        <li>パルプ・紙</li>
+        <li>化学</li>
+        <li>医薬品</li>
+        <li>石油・石炭</li>
+        <li>ゴム製品</li>
+        <li>鉄鋼</li>
+        <li>非鉄金属</li>
+        <li>金属製品</li>
+        <li>機械</li>
+        <li>電気機器</li>
+        <li>輸送用機器</li>
+        <li>精密機器</li>
+        <li>その他製品</li>
+        <li>電気・ガス</li>
+        <li>陸運業</li>
+        <li>海運業</li>
+        <li>空運業</li>
+        <li>倉庫・運輸</li>
+        <li>情報・通信業</li>
+        <li>卸売業</li>
+        <li>小売業</li>
+        <li>銀行業</li>
+        <li>証券・商品</li>
+        <li>保険業</li>
+        <li>不動産業</li>
+        <li>サービス業</li>
+        <li>繊維製品</li>
+        <li>その他金融業</li>
+      </ul>
     </div>
   </div>
   <div class="main">
     <div class="main-upper">
-      2021年　総資産 合計：<%= @bs_asset_sum %>百万円
+      2021年　売上高　上位<%= @count %>社
     </div>
     <div class="main-middle">
       <div id="corporation_graph"></div>
-      <script src="https://d3js.org/d3.v4.min.js"></script>
+      <script src="https://d3js.org/d3.v5.min.js"></script>
       <script>
-        // 1. 描画用のデータ準備
-        var svg = d3.select("#corporation_graph")
-            .append("svg")
-            .attr("width", "100%")
-            .attr("height", "80vh")
+        const svg = d3.select("#corporation_graph")
+          .append("svg")
+          .attr("width", "100%")
+          .attr("height", "80vh")
 
-        var width = document.querySelector("svg").clientWidth;
-        var height = document.querySelector("svg").clientHeight;
+        const width = document.querySelector("svg").clientWidth;
+        const height = document.querySelector("svg").clientHeight;
+
         var data = {
-          "name": "全業種",
-          "children": [
-            { "name": "水産・農林業", "value": 1570904695000, "link": "/" },
-            { "name": "ガラス・土石", "value": 11161120620000 },
-            { "name": "鉱業", "value": 6016378000000 },
-            { "name": "建設業", "value": 36581939054000 },
-            { "name": "食料品", "value": 33032196297000 },
-            { "name": "パルプ・紙", "value": 6955209903000 },
-            { "name": "化学", "value": 61545051854000 },
-            { "name": "医薬品", "value": 32906982340000 },
-            { "name": "石油・石炭", "value": 16973528994000 },
-            { "name": "ゴム製品", "value": 8437401308000 },
-            { "name": "鉄鋼", "value": 22868243345000 },
-            { "name": "非鉄金属", "value": 14307877863000 },
-            { "name": "金属製品", "value": 9615506269000 },
-            { "name": "機械", "value": 47922100989000 },
-            { "name": "電気機器", "value": 128551452390000 },
-            { "name": "輸送用機器", "value": 159942074591000 },
-            { "name": "精密機器", "value": 9423701575000 },
-            { "name": "その他製品", "value": 13727202741000 },
-            { "name": "電気・ガス", "value": 58223926438000 },
-            { "name": "陸運業", "value": 49688867309000 },
-            { "name": "海運業", "value": 8346364647000 },
-            { "name": "空運業", "value": 5711455000000 },
-            { "name": "倉庫・運輸", "value": 3011940004000 },
-            { "name": "情報・通信業", "value": 130895527612000 },
-            { "name": "卸売業", "value": 106425681051000 },
-            { "name": "小売業", "value": 58153666586000 },
-            { "name": "銀行業", "value": 1694513829000000, "link": "/" },
-            { "name": "証券・商品", "value": 97223981022000 },
-            { "name": "保険業", "value": 217306849275000 },
-            { "name": "不動産業", "value": 42581075219000 },
-            { "name": "サービス業", "value": 346596343673000 },
-            { "name": "繊維製品", "value": 7942055892000 },
-            { "name": "その他金融業", "value": 144562993612000 },
-          ]
+          security_name: "総計",
+          children: []
         };
 
-        // 2. 描画用のデータ変換
+        <% @corporation_results.first(@count).shuffle.each do | corporation | %>
+          var corporation_name = { security_name: "<%= corporation.security_name %>" };
+          var corporation_value = { value: <%= corporation.net_sale %> };
+          var corporation_link = { link: "corporations/<%= corporation.id %>" };
+          var corporation_data = Object.assign(corporation_name, corporation_value, corporation_link);
+          data.children.push(corporation_data);
+        <% end %>
+
+          // 2. 描画用のデータ変換
         root = d3.hierarchy(data);
         root.sum(function (d) { return d.value; });
 
-        var pack = d3.pack()
+        const pack = d3.pack()
           .size([width, height])
-          .padding(10);
-          
+          .padding(5);
+
         pack(root);
 
-        var tooltip = d3.select("#corporation_graph")
+        const tooltip = d3.select("#corporation_graph")
           .append("div")
           .attr("class", "tooltip")
           .style("background-color", "white")
@@ -81,41 +95,48 @@
           .style("padding", "5px")
           .style("position", "absolute")
 
-        var showTooltip = function (d) {
-            tooltip
-              .transition()
-              .duration(200)
-            tooltip
-              .style("opacity", 1)
-              .html("業種：" + d.data.name + "<br>総資産：" + d.value + "円")
-              .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY + 20) + "px")
-              .style("pointer-events", "none")
-        };
-        
-        var moveTooltip = function (d) {
-            tooltip
-              .style("left", (d3.event.pageX + 10) + "px")
-              .style("top", (d3.event.pageY + 20) + "px")
-              .style("pointer-events", "none")
+        const showTooltip = function (d) {
+          tooltip
+            .transition()
+            .duration(200)
+          tooltip
+            .style("opacity", 1)
+            .html("銘柄：" + d.data.security_name + "<br>売上高：" + d.value + "百万円")
+            .style("left", (d3.event.pageX + 10) + "px")
+            .style("top", (d3.event.pageY - 40) + "px")
+            .style("pointer-events", "none")
         };
 
-        var hideTooltip = function (d) {
-            tooltip
-              .transition()
-              .duration(200)
-              .style("opacity", 0)
+        const moveTooltip = function (d) {
+          tooltip
+            .style("left", (d3.event.pageX + 10) + "px")
+            .style("top", (d3.event.pageY - 40) + "px")
+            .style("pointer-events", "none")
         };
-      
+
+        const hideTooltip = function (d) {
+          tooltip
+            .transition()
+            .duration(200)
+            .style("opacity", 0)
+        };
+
         // 3. svg要素の配置
-        var node = d3.select("svg").selectAll(".node")
+        const node = d3.select("svg").selectAll(".node")
           .data(root.descendants())
           .enter()
           .append("g")
           .attr("transform", function (d) { return "translate(" + d.x + "," + (d.y) + ")"; });
 
-        var color = ["#555", "Khaki"];
-        node.append("circle")
+        const color = ["#555", "Khaki"];
+
+        
+
+        node.append("a")
+          .attr('xlink:href', function (d) {
+            return d.data.link;
+          })
+        .append("circle")
           .attr("class", "bubbles")
           .attr("r", function (d) { return d.r; })
           .attr("stroke", "none")
@@ -125,15 +146,11 @@
           .on("mouseleave", hideTooltip)
 
         node.append("text")
-          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; } )
+          .style("text-anchor", function (d) { return d.children ? "end" : "middle"; })
           .attr("font-size", "100%")
-          .text(function (d) { return d.children ? "" : d.data.name;})
+          .text(function (d) { return d.children ? "" : d.data.security_name; })
           .style("pointer-events", "none")
-
       </script>
     </div>
   </div>
 </div>
-
-
-

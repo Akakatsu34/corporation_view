@@ -11,8 +11,12 @@ class CorporationsController < ApplicationController
       @q = Corporation.ransack(params[:q])
       @q.sorts = 'net_sale desc' if @q.sorts.empty?
       @corporation_results = @q.result #検索の結果を受け取る。
+      @sector = "全業種"
     end
     @count = 50
+    @year = 2021
+    @model = Pl
+    @colum = :net_sale
   end
 
   def index2

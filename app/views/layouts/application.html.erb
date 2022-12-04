@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>CorporationView</title>
+    <title>Corp View</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -12,82 +12,7 @@
   <body>
     <header>
       <div class="logo">
-        <a href="/">Corporation View</a>
-      </div>
-      <button class="header-right">検索条件</button>
-      <div class="select-main">
-        <div class="select-main-left">
-          <div class="select-year">
-            2022年
-          </div>
-          <div class="market">
-            <div class="prime">プライム</div>
-            <div class="standard">スタンダード</div>
-            <div class="growth">グロース</div>
-          </div>
-          <div class="type">業種選択</div>
-        </div>
-        <div class="select-main-center">
-          <div class="bs">
-            <div class="bs-left">
-              <div class="assets">
-                資産
-              </div>
-            </div>
-            <div class="bs-right">
-              <div class="liabilities">
-                負債
-              </div>
-              <div class="equity">
-                純資産
-              </div>
-            </div>
-          </div>
-          <div class="cf">
-            <div class="operating">営業キャッシュフロー</div>
-            <div class="investing">投資キャッシュフロー</div>
-            <div class="financing">財務キャッシュフロー</div>
-            <div class="free">フリーキャッシュフロー</div>
-          </div>
-        </div>
-        <div class="select-main-right">
-          <div class="pl">
-            <div class="uriagedaka">
-              <div class="uriagedaka-top"></div>
-              <div class="uriagedaka-bottom">売上高</div>
-            </div>
-            <div class="sourieki">
-              <div class="sourieki-top"></div>
-              <div class="sourieki-bottom">売上総利益</div>
-            </div>
-            <div class="eigyo">
-              <div class="eigyo-top"></div>
-              <div class="eigyo-bottom">営業利益</div>
-            </div>
-            <div class="keijo">
-              <div class="keijo-top"></div>
-              <div class="keijo-bottom">経常利益</div>
-            </div>
-            <div class="zeimae">
-              <div class="zeimae-top"></div>
-              <div class="zeimae-bottom">税引前当期利益</div>
-            </div>
-            <div class="jun">
-              <div class="jun-top"></div>
-              <div class="jun-bottom">純利益</div>
-            </div>
-          </div>
-          <div class="other">
-            <div class="other-left">
-              <div class="market-capitalization">時価総額</div>
-              <div class="employee">従業員数</div>
-            </div>
-            <div class="other-right">
-              <div class="stock-price">株価</div>
-              <div class="other-item">その他</div>
-            </div>
-          </div>
-        </div>
+        <a href="/">Corp View</a>
       </div>
     </header>
     <%= yield %>
@@ -97,7 +22,7 @@
     </footer>
     <script>
       var $target = document.querySelector('.select-main')
-      var $button = document.querySelector('.header-right')
+      var $button = document.querySelector('.search-option')
       $button.addEventListener('click', function() {
         $target.classList.toggle('is-hidden')
       })

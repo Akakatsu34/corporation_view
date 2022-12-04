@@ -1,8 +1,42 @@
-jp:
-  number:
-    currency:
-      format:
-        unit: "円"
-        format: "%n%u"
-        negative_format: "-%n%u"
-        precision: 0
+ja:
+  activerecord:
+    attributes:
+      corporation:
+        security_code: 証券コード
+        company_name: 会社名
+        company_name_kana: 会社名（カナ）
+        company_name_en: 会社名（英語）
+        security_name: 銘柄名
+        address: 所在地
+        consolidate: 所在地
+        market: 市場
+        sector_thirty_three_number: 33業種コード
+        sector_thirty_three_name: 33業種区分
+        sector_seventeen_number: 17業種コード
+        sector_seventeen_name: 17業種区分
+        closing_date: 決算日
+        asset: 総資産
+        net_sale: 売上高
+      bs:
+        security_code: 証券コード
+        year: 年度
+        asset: 総資産
+        net_asset: 純資産
+        shareholders_equity: 株主資本
+        retained_earning: 利益剰余金
+        current_liability: 流動負債
+        noncurrent_liability: 固定負債
+      pl:
+        security_code: 証券コード
+        year: 年度
+        net_sale: 売上高
+        operating_income: 営業利益
+        ordinary_income: 経常利益
+        profit_loss: 純利益
+      cf:
+        security_code: 証券コード
+        year: 年度
+        net_cash_provided_by_used_in_operating_activity: 営業キャッシュフロー
+        net_cash_provided_by_used_in_investment_activity: 投資キャッシュフロー
+        net_cash_provided_by_used_in_financing_activity: 財務キャッシュフロー
+       

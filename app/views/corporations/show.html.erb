@@ -2,7 +2,7 @@
   <div class="show-main-left">
     <div class="show-corporation-information">
       <div class="show-corporation-name">
-        <%= @corporation_name %>
+         <a href="https://www.google.com/search?q=<%= @corporation_name %>&sourceid=chrome&ie=UTF-8" target="_blank" rel="noopener noreferrer"><%= @corporation_name %></a> 
       </div>
       <div class="show-security_code">
         <%= @code %>
@@ -69,7 +69,6 @@
     </div>
     <div class="show-cf">
       <canvas id="cf-graph" width="200" height="200"></canvas>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
         var ctx = document.getElementById('cf-graph');
         var myChart = new Chart(ctx, {
@@ -106,7 +105,6 @@
   <div class="show-main-right">
     <div class="show-pl">
       <canvas id="pl-graph" width="200" height="200"></canvas>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
       <script>
         var ctx = document.getElementById('pl-graph');
         var myChart = new Chart(ctx, {

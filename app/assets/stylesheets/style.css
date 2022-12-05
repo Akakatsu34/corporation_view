@@ -11,7 +11,7 @@ body {
 /* ヘッダー画面 */
 header {
   width: 100%;
-  height: 100px;
+  height: 70px;
   background-color: #969696;
   display: flex;
   justify-content: space-between;
@@ -333,7 +333,7 @@ a {
 /* 中央ブロック */
 .wrapper {
   width: 100%;
-  height: 90%;
+  height: calc(100vh - 70px);
   display: flex;
   background-color: #555;
 }
@@ -453,7 +453,7 @@ a {
 /* フッター画面 */
 footer {
   width: 100%;
-  height: 70px;
+  height: 10%;
   background-color: #FAFAFA;
   display: flex;
   justify-content: center;
@@ -510,13 +510,22 @@ footer {
 }
 
 .sector_thirty_three_list {
+  width: 100%;
+  height: 60%;
   margin: 20px;
   font-size: 15px;
+  overflow: scroll;
 }
+
+/* .sector_thirty_three_list {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+} */
 
 .show-main {
   width: 100vw;
-  height: 80%;
+  height: calc(100% - 70px);
   display: flex;
 }
 

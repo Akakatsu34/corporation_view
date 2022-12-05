@@ -1,24 +1,24 @@
 require 'csv'
 
-# CSV.foreach('db/corporation_data_2022.csv') do |corporation|
-#   Corporation.create(
-#     :security_code => corporation[0], 
-#     :company_name => corporation[1],
-#     :company_name_kana => corporation[2],
-#     :company_name_en => corporation[3],
-#     :security_name => corporation[4],
-#     :address => corporation[5],
-#     :consolidate => corporation[6],
-#     :market => corporation[7],
-#     :sector_thirty_three_number => corporation[8],
-#     :sector_thirty_three_name => corporation[9],
-#     :sector_seventeen_number => corporation[10],
-#     :sector_seventeen_name => corporation[11],
-#     :closing_date => corporation[12],
-#     :asset => corporation[13],
-#     :net_sale => corporation[14],
-#   )
-# end
+CSV.foreach('db/corporation_data_2022.csv') do |corporation|
+  Corporation.create(
+    :security_code => corporation[0], 
+    :company_name => corporation[1],
+    :company_name_kana => corporation[2],
+    :company_name_en => corporation[3],
+    :security_name => corporation[4],
+    :address => corporation[5],
+    :consolidate => corporation[6],
+    :market => corporation[7],
+    :sector_thirty_three_number => corporation[8],
+    :sector_thirty_three_name => corporation[9],
+    :sector_seventeen_number => corporation[10],
+    :sector_seventeen_name => corporation[11],
+    :closing_date => corporation[12],
+    :asset => corporation[13],
+    :net_sale => corporation[14],
+  )
+end
 
 CSV.foreach('db/BS_2021.csv') do |corporation|
   Bs.create(

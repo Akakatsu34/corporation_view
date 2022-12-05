@@ -38,10 +38,7 @@ a {
   visibility: hidden;
   font-size: 15px;
   color: #222;
-  text-shadow: text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF,
-                            -1px 1px 0 #FFF, 1px -1px 0 #FFF,
-                            0px 1px 0 #FFF, 0-1px 0 #FFF,
-                            -1px 0 0 #FFF, 1px 0 0 #FFF;
+  text-shadow: 1px 1px 0 #FFF, -1px -1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, 0px 1px 0 #FFF, 0-1px 0 #FFF, -1px 0 0 #FFF, 1px 0 0 #FFF;
   position: absolute;
   border: solid 5px white;
   border-radius: 10px;
@@ -66,7 +63,6 @@ a {
   justify-content: center;
   align-items: center;
   font-size: 150%;
-  color: #ccc;
 }
 
 .select {
@@ -130,7 +126,6 @@ a {
 .select-main-center {
   width: 30%;
   height: 100%;
-  /* background-color: lightgreen; */
 }
 
 .bs {
@@ -145,7 +140,6 @@ a {
   width: 50%;
   height: 100%;
   background-color: #666666;
-  color: #fff;
 }
 
 .bs-right {
@@ -193,14 +187,12 @@ a {
   width: 100%;
   height: 25%;
   background-color: lightslategray;
-  color: #fff;
 }
 
 /* 右画面 */
 .select-main-right {
   width: 30%;
   height: 100%;
-  /* background-color: lightblue; */
 }
 
 .pl {
@@ -214,7 +206,6 @@ a {
 .uriagedaka {
   width: 16.66%;
   background-color: #222;
-  color: #fff;
 }
 
 .uriagedaka-top {}
@@ -224,7 +215,6 @@ a {
 .sourieki {
   width: 16.66%;
   background-color: #444;
-  color: #fff;
 }
 
 .sourieki-top {
@@ -236,7 +226,6 @@ a {
 .eigyo {
   width: 16.66%;
   background-color: #666;
-  color: #fff;
 }
 
 .eigyo-top {

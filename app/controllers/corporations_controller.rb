@@ -38,6 +38,8 @@ class CorporationsController < ApplicationController
     @address = Corporation.find_by(security_code: @code).address
     @corporation_name = Corporation.find_by(security_code: @code).security_name
     @asset = Bs.find_by(security_code: @code).asset
+    @current_liability = Bs.find_by(security_code: @code).current_liability
+    @noncurrent_liability = Bs.find_by(security_code: @code).noncurrent_liability
     @net_asset = Bs.find_by(security_code: @code).net_asset
     @net_sale = Pl.find_by(security_code: @code).net_sale
     @operating_income = Pl.find_by(security_code: @code).operating_income

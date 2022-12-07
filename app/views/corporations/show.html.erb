@@ -42,25 +42,40 @@
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
-            labels: ['総資産', '純資産'],
+            labels: ['総資産'],
             datasets: [{
-              label: '貸借対照表',
-              data: [<%= @asset %>, <%= @net_asset %>],
+              label: '総資産',
+              data: [<%= @asset %>],
               backgroundColor: [
                 'rgba(75, 255, 192, 1)',
-                'rgba(54, 162, 255, 1)',
               ],
               borderColor: [
                 'rgba(75, 255, 192, 1)',
-                'rgba(54, 162, 255, 1)',
               ],
               borderWidth: 1
-            }]
-          },
+              },{
+              label: ['純資産'],
+              data: [  <%= @net_asset %>,<%= @current_liability %>, <%= @noncurrent_liability %>],
+              backgroundColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)',
+              ],
+              borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 99, 132, 1)',
+                'rgba(255, 206, 86, 1)',
+              ],
+              borderWidth: 1
+              }],
+            },
           options: {
             scales: {
+              xAxes: {
+                categoryPercentage: 2,
+                barPercentage: 0.9,     
+              },
               y: {
-                beginAtZero: true
               }
             }
           }

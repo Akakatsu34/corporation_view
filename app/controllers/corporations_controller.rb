@@ -41,6 +41,8 @@ class CorporationsController < ApplicationController
     @current_liability = Bs.find_by(security_code: @code).current_liability
     @noncurrent_liability = Bs.find_by(security_code: @code).noncurrent_liability
     @net_asset = Bs.find_by(security_code: @code).net_asset
+    @shareholders_equity = Bs.find_by(security_code: @code).shareholders_equity
+    @retained_earning = Bs.find_by(security_code: @code).retained_earning
     @net_sale = Pl.find_by(security_code: @code).net_sale
     @operating_income = Pl.find_by(security_code: @code).operating_income
     @ordinary_income = Pl.find_by(security_code: @code).ordinary_income
